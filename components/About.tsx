@@ -101,11 +101,11 @@ export default function About() {
           transition={{ duration: 1, delay: 0.8 }}
         >
           <div className="relative inline-block">
-            <div className="absolute -left-8 -top-8 text-8xl text-neon-purple/20 font-serif">"</div>
+            <div className="absolute -left-8 -top-8 text-8xl text-neon-purple/20 font-serif">&ldquo;</div>
             <blockquote className="text-2xl md:text-3xl font-light italic text-white/80 max-w-4xl mx-auto leading-relaxed">
               Ne pravimo sajtove. Pravimo digitalne ekosisteme koji pokreću transformaciju.
             </blockquote>
-            <div className="absolute -right-8 -bottom-8 text-8xl text-neon-purple/20 font-serif">"</div>
+            <div className="absolute -right-8 -bottom-8 text-8xl text-neon-purple/20 font-serif">&rdquo;</div>
           </div>
         </motion.div>
       </div>
