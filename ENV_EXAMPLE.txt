@@ -1,0 +1,14 @@
+# OPCIJA 1: RESEND (Preporučeno)
+# Registruj se na https://resend.com
+# Besplatno: 100 emailova/dan, 3,000/mesec
+RESEND_API_KEY=re_123456789
+
+# OPCIJA 2: GMAIL SMTP
+# Kreiraj App Password: https://myaccount.google.com/apppasswords
+GMAIL_USER=fantomsystems@gmail.com
+GMAIL_APP_PASSWORD=abcd efgh ijkl mnop
+
+# OPCIJA 3: WEB3FORMS
+# Registruj se na https://web3forms.com (100% besplatno)
+WEB3FORMS_ACCESS_KEY=your-access-key-here
+
