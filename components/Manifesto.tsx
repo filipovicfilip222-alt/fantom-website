@@ -11,27 +11,27 @@ export default function Manifesto() {
   const principles = [
     {
       icon: Timer,
-      title: "Brzina je Kritična",
-      value: "<100ms",
-      description: "Svaki milisekund ima značaj. Naši sistemi su optimizovani za maksimalne performanse.",
+      title: "Brza Izrada Sajta",
+      value: "7-14 dana",
+      description: "Profesionalno pravljenje sajtova u kratkom roku. Efikasna komunikacija, brza realizacija, bez skrivenih troškova.",
     },
     {
       icon: Lock,
-      title: "Bezbednost je Osnova",
+      title: "Sigurnost i Pouzdanost",
       value: "100%",
-      description: "Zero-trust arhitektura. End-to-end enkripcija. Vaši podaci su neprobijna tvrđava.",
+      description: "SSL sertifikat, redovni backup, zaštita od hakera. Vaš sajt je siguran i uvek dostupan. Besplatno održavanje.",
     },
     {
       icon: Palette,
-      title: "Estetika je Funkcionalnost",
-      value: "Awwwards",
-      description: "Dizajn koji ne samo što izgleda dobro—već radi besprekorno. Forma prati funkciju.",
+      title: "Moderni Web Dizajn",
+      value: "Premium",
+      description: "Atraktivni dizajn koji privlači pažnju i zadržava posetioce. Prilagođen vašem brendu. Desktop i mobilni optimizovan.",
     },
     {
       icon: Rocket,
-      title: "Skalabilnost je Standardna",
-      value: "∞",
-      description: "Od nula do miliona korisnika. Naša infrastruktura raste sa vašim ambicijama.",
+      title: "SEO Prvi na Google-u",
+      value: "TOP 3",
+      description: "Optimizacija za pretraživače uključena. Tehnički SEO, brzina, keywords. Više posetilaca = više prodaje.",
     },
   ];
 
@@ -56,14 +56,15 @@ export default function Manifesto() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-xs uppercase tracking-widest text-neon-purple">
-              Naš Manifesto
+              Zašto Nas Odabrati
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            Zašto je Fantom Različit
+            Zašto Izabrati Fantom za Izradu Sajta
           </h2>
           <p className="text-xl text-white/60 max-w-3xl mx-auto">
-            Četiri principa koja čine našu DNK. Ne pravimo kompromise.
+            Profesionalnost, brzina, kvalitet. Vaš sajt zaslužuje najbolje. 
+            Saznajte zašto smo najbolja agencija za pravljenje sajtova.
           </p>
         </motion.div>
 
@@ -124,16 +125,16 @@ export default function Manifesto() {
         >
           <div className="text-center space-y-6">
             <h3 className="text-3xl md:text-4xl font-bold">
-              Mi Ne Pravimo Sajtove.
+              Kompletna Izrada Sajtova na Ključ
             </h3>
             <div className="h-[2px] w-20 bg-gradient-to-r from-neon-purple to-electric-blue mx-auto" />
             <p className="text-lg md:text-xl text-white/80 leading-relaxed">
-              Pravimo digitalne ekosisteme koji transformišu brendove. Svaka linija 
-              koda je pisana sa namerom. Svaki pixel ima svrhu. Svaka animacija 
-              donosi značenje.
+              Od dizajna, preko programiranja, do SEO optimizacije i lansiranja. 
+              Sve radimo za vas. Vi dobijate gotov, funkcionalan sajt koji donosi rezultate. 
+              Profesionalna izrada web stranica po pristupačnim cenama.
             </p>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed">
-              Ovo nije samo razvoj. Ovo je arhitektura budućnosti.
+              Kontaktirajte nas danas i dobijte besplatan predračun za izradu vašeg sajta!
             </p>
           </div>
 

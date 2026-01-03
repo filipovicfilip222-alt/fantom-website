@@ -11,18 +11,18 @@ export default function About() {
   const features = [
     {
       icon: Code2,
-      title: "Sistemska Superiornost",
-      description: "Izgradnja platformi koje se nose sa milionima operacija. Bez kompromisa.",
+      title: "Profesionalna Izrada Sajtova",
+      description: "Kreiranje modernih web sajtova sa najnovijim tehnologijama. React, Next.js, responsive dizajn.",
     },
     {
       icon: Brain,
-      title: "AI Integracija",
-      description: "Mašinsko učenje koje transformiše podatke u inteligenciju.",
+      title: "SEO Optimizacija",
+      description: "Svaki sajt pravimo sa SEO u vidu. Prvi na Google-u. Više posetilaca. Više klijenata.",
     },
     {
       icon: Network,
-      title: "Skalabilna Arhitektura",
-      description: "Infrastruktura koja raste sa vašim ambicijama. Automatski.",
+      title: "Brzina i Performanse",
+      description: "Brzi sajtovi koji se učitavaju za sekunde. Optimizovani za sve uređaje i pregledače.",
     },
   ];
 
@@ -47,16 +47,16 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-xs uppercase tracking-widest text-neon-purple">
-              O Fantom-u
+              O Nama
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            Mi nismo obična agencija
+            Najbolja Agencija za Izradu Sajtova
           </h2>
           <p className="text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
-            Fantom je sistem. Kombinacija napredne tehnologije, veštačke inteligencije 
-            i minimalističkog dizajna. Radimo sa brendovima koji razumeju moć digitalne 
-            transformacije.
+            Specijalizovani smo za izradu profesionalnih web sajtova i web aplikacija. 
+            Pravljenje sajtova, web dizajn, SEO optimizacija, e-commerce rešenja. 
+            Svaki projekat radimo sa pažnjom i posvećenošću. Vaš uspeh je naš cilj.
           </p>
         </motion.div>
 
@@ -103,7 +103,7 @@ export default function About() {
           <div className="relative inline-block">
             <div className="absolute -left-8 -top-8 text-8xl text-neon-purple/20 font-serif">&ldquo;</div>
             <blockquote className="text-2xl md:text-3xl font-light italic text-white/80 max-w-4xl mx-auto leading-relaxed">
-              Ne pravimo sajtove. Pravimo digitalne ekosisteme koji pokreću transformaciju.
+              Profesionalna izrada sajta koja donosi rezultate. Moderni dizajn. Brze performanse. Prvi na Google-u.
             </blockquote>
             <div className="absolute -right-8 -bottom-8 text-8xl text-neon-purple/20 font-serif">&rdquo;</div>
           </div>

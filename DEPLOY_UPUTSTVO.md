@@ -108,12 +108,14 @@ https://fantom-website.vercel.app
 - Link: https://www.rnids.rs
 - Cena: ~2000 RSD/godišnje
 
+**✅ ODABRAN DOMEN: `fantom.systems`**
+
 ### Proveri dostupnost:
 ```
 fantom.com - proveri
 fantom.co - proveri
 fantom.io - proveri
-fantom.rs - proveri
+fantom.systems - ✅ ODABRAN
 getfantom.com - backup
 thefantom.com - backup
 ```

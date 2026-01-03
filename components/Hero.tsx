@@ -23,9 +23,13 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.5 }}
             className="mb-8"
           >
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-6">
-              <span className="inline-block glitch neon-glow" data-text="Fantom">
-                Fantom
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
+              <span className="inline-block neon-glow">
+                Profesionalna Izrada Sajta
+              </span>
+              <br />
+              <span className="text-3xl md:text-5xl lg:text-6xl inline-block glitch text-neon-purple mt-4" data-text="i Web Aplikacija">
+                i Web Aplikacija
               </span>
             </h1>
           </motion.div>
@@ -37,12 +41,13 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.8 }}
             className="space-y-4 mb-12"
           >
-            <p className="text-xl md:text-3xl lg:text-4xl font-light tracking-wide text-white/90">
-              Arhitektura Digitalnih Sistema
+            <p className="text-xl md:text-2xl lg:text-3xl font-light tracking-wide text-white/90">
+              Pravljenje Sajtova | Web Dizajn | Razvoj Web Stranica
             </p>
             <div className="h-[1px] w-32 bg-gradient-to-r from-transparent via-neon-purple to-transparent mx-auto" />
             <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto">
-              Mi gradimo nevidljivu infrastrukturu. Inteligencija. Sistem. Dizajn.
+              Kreiranje modernih, brzih i SEO optimizovanih web sajtova. 
+              Od dizajna do lansiranja. Vaš sajt. Naša ekspertiza.
             </p>
           </motion.div>
 
@@ -56,8 +61,9 @@ export default function Hero() {
             <a
               href="#contact"
               className="group relative px-8 py-4 bg-neon-purple hover:bg-neon-purple/90 text-white font-semibold uppercase tracking-wider text-sm transition-all duration-300 overflow-hidden"
+              aria-label="Kontaktirajte nas za izradu sajta"
             >
-              <span className="relative z-10">Započni Saradnju</span>
+              <span className="relative z-10">Naručite Svoj Sajt</span>
               <motion.div
                 className="absolute inset-0 bg-electric-blue"
                 initial={{ x: "-100%" }}
@@ -68,8 +74,9 @@ export default function Hero() {
             <a
               href="#capabilities"
               className="group px-8 py-4 border border-white/30 hover:border-neon-purple text-white font-semibold uppercase tracking-wider text-sm transition-all duration-300 glass"
+              aria-label="Pogledajte naše usluge izrade sajtova"
             >
-              Istraži Sistem
+              Naše Usluge
             </a>
           </motion.div>
 
@@ -81,9 +88,9 @@ export default function Hero() {
             className="grid grid-cols-3 gap-8 mt-20 max-w-3xl mx-auto"
           >
             {[
-              { value: "99.9%", label: "Uptime" },
-              { value: "<100ms", label: "Vreme Odgovora" },
-              { value: "100%", label: "Sigurnost" },
+              { value: "50+", label: "Sajtova Napravljeno" },
+              { value: "<2s", label: "Brzina Učitavanja" },
+              { value: "100%", label: "Zadovoljnih Klijenata" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

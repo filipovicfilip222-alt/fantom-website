@@ -11,39 +11,39 @@ export default function Capabilities() {
   const capabilities = [
     {
       icon: Globe,
-      title: "Napredni Web Razvoj",
-      description: "Visoko-performantne web aplikacije sa modernim tehnologijama. React, Next.js, serverless arhitektura.",
-      tags: ["Next.js", "React", "TypeScript", "Tailwind"],
-    },
-    {
-      icon: Cpu,
-      title: "AI & Mašinsko Učenje",
-      description: "Implementacija naprednih AI sistema. Predikcija, klasifikacija, obrada prirodnog jezika.",
-      tags: ["TensorFlow", "PyTorch", "OpenAI", "Custom Models"],
+      title: "Izrada Web Sajtova",
+      description: "Profesionalno pravljenje sajtova svih vrsta - prezentacioni sajtovi, portfolio, landing page. Moderni dizajn, brzo učitavanje, potpuno prilagođeni mobilnim uređajima (responsive).",
+      tags: ["Izrada Sajta", "Web Dizajn", "Responsive", "Moderni Sajt"],
     },
     {
       icon: Database,
-      title: "Sistemska Arhitektura",
-      description: "Skalabilna infrastruktura koja raste sa vašim potrebama. Cloud-native rešenja i DevOps automatizacija.",
-      tags: ["AWS", "Docker", "Kubernetes", "CI/CD"],
-    },
-    {
-      icon: Shield,
-      title: "Bezbednost & Enkripcija",
-      description: "Implementacija najviših standarda sigurnosti. Zero-trust arhitektura i end-to-end enkripcija.",
-      tags: ["OAuth", "JWT", "SSL/TLS", "Penetration Testing"],
+      title: "E-Commerce Sajtovi",
+      description: "Kreiranje online prodavnica i e-commerce sajtova. Kompletna integracija plaćanja, upravljanje proizvodima, automatizacija porudžbina. Povećajte online prodaju.",
+      tags: ["Online Prodavnica", "E-Commerce", "WooCommerce", "Shopify"],
     },
     {
       icon: Zap,
-      title: "Performance Optimizacija",
-      description: "Maksimalna brzina učitavanja. CDN integracija, lazy loading, optimizovane slike i caching strategije.",
-      tags: ["Core Web Vitals", "CDN", "Caching", "Compression"],
+      title: "SEO Optimizacija Sajtova",
+      description: "Vaš sajt na prvom mestu Google pretrage. Profesionalna SEO optimizacija, brže učitavanje, bolje pozicioniranje. Više posetilaca = više klijenata.",
+      tags: ["SEO", "Google Ranking", "Optimizacija", "Marketing"],
     },
     {
       icon: Sparkles,
-      title: "UI/UX Dizajn",
-      description: "Pixel-perfect dizajn. Od wireframe-a do finalnog proizvoda. Fokus na korisničko iskustvo.",
-      tags: ["Figma", "Framer Motion", "3D Graphics", "Microinteractions"],
+      title: "Web Dizajn i Redizajn",
+      description: "Kreativni web dizajn koji ostavlja utisak. Redizajn postojećih sajtova, moderan i atraktivan izgled. Od ideje do realizacije.",
+      tags: ["Grafički Dizajn", "UX/UI", "Figma", "Adobe"],
+    },
+    {
+      icon: Cpu,
+      title: "Web Aplikacije",
+      description: "Razvoj naprednih web aplikacija i custom sistema. Automatizacija procesa, CRM, booking sistemi, portali. Prilagođeno vašem bizinsu.",
+      tags: ["Web App", "Custom Development", "React", "Next.js"],
+    },
+    {
+      icon: Shield,
+      title: "Održavanje Sajtova",
+      description: "Redovno ažuriranje sadržaja, tehnička podrška, backup, sigurnost. Vaš sajt uvek ažuran i bezbedan. Brza pomoć kada vam treba.",
+      tags: ["Održavanje", "Podrška", "Backup", "Bezbednost"],
     },
   ];
 
@@ -72,10 +72,11 @@ export default function Capabilities() {
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            Šta Radimo
+            Usluge Izrade i Razvoja Sajtova
           </h2>
           <p className="text-xl text-white/60 max-w-3xl mx-auto">
-            Kompletna digitalna transformacija. Od koncepta do izvršenja.
+            Od pravljenja sajtova do SEO optimizacije. Sve na jednom mestu. 
+            Vaš uspešan online biznis počinje ovde.
           </p>
         </motion.div>
 
@@ -138,9 +139,10 @@ export default function Capabilities() {
           <a
             href="#contact"
             className="inline-block px-8 py-4 glass border border-neon-purple/50 hover:bg-neon-purple/10 text-white font-semibold uppercase tracking-wider text-sm transition-all duration-300 group"
+            aria-label="Kontaktirajte nas za besplatan predračun za izradu sajta"
           >
             <span className="group-hover:text-neon-purple transition-colors">
-              Razgovarajmo o Projektu
+              Zatražite Besplatan Predračun
             </span>
           </a>
         </motion.div>
