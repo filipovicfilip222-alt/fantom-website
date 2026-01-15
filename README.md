@@ -76,3 +76,7 @@ Edit the components in the `components/` directory to customize the content and 
 
 © 2026 Fantom. All rights reserved.
 
+---
+
+**Status:** Active Development ✓
+
