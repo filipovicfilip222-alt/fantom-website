@@ -1,332 +1,299 @@
-"use client";
+'use client'
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { Mail, MessageSquare, User, Send, CheckCircle, Phone } from "lucide-react";
+import { useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Send, ArrowUpRight } from 'lucide-react'
+
+interface FormFieldProps {
+  label: string
+  name: string
+  type?: string
+  isTextarea?: boolean
+  value: string
+  onChange: (value: string) => void
+}
+
+const FormField = ({ label, name, type = 'text', isTextarea = false, value, onChange }: FormFieldProps) => {
+  const [isFocused, setIsFocused] = useState(false)
+  const isActive = isFocused || value.length > 0
+  
+  return (
+    <div className="relative">
+      {/* Floating label */}
+      <motion.label
+        className={`absolute left-0 pointer-events-none text-white/40 transition-all duration-300 ${
+          isActive ? 'text-xs -top-6' : 'text-base top-4'
+        }`}
+        animate={{
+          y: isActive ? 0 : 0,
+          scale: isActive ? 0.85 : 1,
+          color: isFocused ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.4)',
+        }}
+      >
+        {label}
+      </motion.label>
+      
+      {isTextarea ? (
+        <textarea
+          name={name}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          rows={4}
+          className="w-full bg-transparent border-b border-white/20 focus:border-white/50 py-4 text-white outline-none resize-none transition-colors duration-300"
+        />
+      ) : (
+        <input
+          type={type}
+          name={name}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className="w-full bg-transparent border-b border-white/20 focus:border-white/50 py-4 text-white outline-none transition-colors duration-300"
+        />
+      )}
+      
+      {/* Active line indicator */}
+      <motion.div
+        className="absolute bottom-0 left-0 h-px bg-white"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: isFocused ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        style={{ transformOrigin: 'left' }}
+      />
+    </div>
+  )
+}
 
 export default function Contact() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const containerRef = useRef<HTMLElement>(null)
+  const isInView = useInView(containerRef, { once: true, margin: '-100px' })
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: '',
+  })
+  
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
+    setIsSubmitting(true)
     
-    // Mailto fallback - UVEK radi
-    const mailtoLink = `mailto:fantomsystems@gmail.com?subject=Nova poruka od ${encodeURIComponent(formState.name)}&body=${encodeURIComponent(
-      `Ime: ${formState.name}\nEmail: ${formState.email}\nTelefon: ${formState.phone}\n\nPoruka:\n${formState.message}`
-    )}`;
+    // Simulate submission
+    await new Promise(resolve => setTimeout(resolve, 2000))
     
-    window.location.href = mailtoLink;
-    
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormState({ name: "", email: "", phone: "", message: "" });
-    }, 2000);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    });
-  };
+    setIsSubmitting(false)
+    setIsSubmitted(true)
+  }
 
   return (
     <section
+      ref={containerRef}
       id="contact"
-      ref={ref}
-      className="relative py-32 px-6 overflow-hidden"
+      className="relative py-32 lg:py-48"
     >
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.div
-            className="inline-block mb-4 px-4 py-2 glass border border-electric-blue/30"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="text-xs uppercase tracking-widest text-electric-blue">
-              Kontakt
-            </span>
-          </motion.div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            Započni Razgovor
-          </h2>
-          <p className="text-xl text-white/60 max-w-3xl mx-auto">
-            Spremni ste da transformišete svoj brend? Kontaktirajte nas i 
-            pokrenimo razgovor o budućnosti vašeg digitalnog prisustva.
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <motion.div
-            className="space-y-8"
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <div>
-              <h3 className="text-3xl font-bold mb-6">Razgovarajmo</h3>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Bilo da imate kompleksan projekat ili jednostavno želite da 
-                razgovarate o mogućnostima, mi smo ovde. Svaki projekat 
-                počinje razgovorom.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <motion.div
-                className="flex items-start gap-4 group"
-                whileHover={{ x: 10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="p-3 bg-neon-purple/10 rounded-lg group-hover:bg-neon-purple/20 transition-colors">
-                  <Mail className="w-6 h-6 text-neon-purple" />
-                </div>
-                <div>
-                  <div className="text-sm uppercase tracking-wider text-white/50 mb-1">
-                    Email
-                  </div>
-                  <a
-                    href="mailto:fantomsystems@gmail.com"
-                    className="text-lg text-white hover:text-neon-purple transition-colors"
-                  >
-                    fantomsystems@gmail.com
-                  </a>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="flex items-start gap-4 group"
-                whileHover={{ x: 10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="p-3 bg-electric-blue/10 rounded-lg group-hover:bg-electric-blue/20 transition-colors">
-                  <Phone className="w-6 h-6 text-electric-blue" />
-                </div>
-                <div>
-                  <div className="text-sm uppercase tracking-wider text-white/50 mb-1">
-                    Telefon
-                  </div>
-                  <a
-                    href="tel:+381659166674"
-                    className="text-lg text-white hover:text-electric-blue transition-colors"
-                  >
-                    +381 65 916 6674
-                  </a>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="flex items-start gap-4 group"
-                whileHover={{ x: 10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="p-3 bg-neon-purple/10 rounded-lg group-hover:bg-neon-purple/20 transition-colors">
-                  <MessageSquare className="w-6 h-6 text-neon-purple" />
-                </div>
-                <div>
-                  <div className="text-sm uppercase tracking-wider text-white/50 mb-1">
-                    Vreme Odgovora
-                  </div>
-                  <p className="text-lg text-white">{"< 24 sata"}</p>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Decorative box */}
+      {/* Background elements */}
+      <div className="absolute inset-0 grid-pattern opacity-20" />
+      
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          {/* Left side - Content */}
+          <div>
             <motion.div
-              className="mt-12 p-8 glass border border-neon-purple/30"
+              className="flex items-center gap-4 mb-8"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="text-sm uppercase tracking-wider text-neon-purple mb-2">
-                Saradnja
-              </div>
-              <p className="text-white/70">
-                Radimo sa brendovima koji razumeju vrednost kvaliteta i 
-                inovacije. Ako tražite agenciju koja će transformisati 
-                vaše digitalno prisustvo, na pravom ste mestu.
-              </p>
+              <motion.div
+                className="h-px w-12 bg-white/30"
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              />
+              <span className="text-xs tracking-ultra-wide text-white/50 uppercase">
+                Contact
+              </span>
             </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6 glass p-8 border border-white/10 relative"
+            
+            <motion.h2
+              className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              {/* Success Message */}
-              {isSubmitted && (
+              Let&apos;s build
+              <br />
+              <span className="text-white/40">something intelligent.</span>
+            </motion.h2>
+            
+            <motion.p
+              className="text-lg text-white/50 leading-relaxed mb-12 max-w-md"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              Ready to automate your future? Tell us about your project 
+              and we&apos;ll craft a solution that transforms your operations.
+            </motion.p>
+            
+            {/* Contact info */}
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors duration-300">
+                  <ArrowUpRight className="w-5 h-5 text-white/40 group-hover:text-white transition-colors duration-300" />
+                </div>
+                <div>
+                  <p className="text-xs text-white/40 uppercase tracking-wide mb-1">Email</p>
+                  <a
+                    href="mailto:hello@fantomsystems.ai"
+                    className="text-white/70 hover:text-white transition-colors duration-300"
+                  >
+                    hello@fantomsystems.ai
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors duration-300">
+                  <ArrowUpRight className="w-5 h-5 text-white/40 group-hover:text-white transition-colors duration-300" />
+                </div>
+                <div>
+                  <p className="text-xs text-white/40 uppercase tracking-wide mb-1">Location</p>
+                  <p className="text-white/70">Remote-First / Global</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Right side - Form */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            {/* Form container with border */}
+            <div className="relative p-8 lg:p-12 border border-white/10">
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/30" />
+              <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-white/30" />
+              <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-white/30" />
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-white/30" />
+              
+              {isSubmitted ? (
                 <motion.div
-                  className="absolute inset-0 bg-deep-black/95 backdrop-blur-sm z-10 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  className="text-center py-16"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <div className="text-center">
-                    <CheckCircle className="w-16 h-16 text-neon-purple mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold mb-2">Poruka Poslata!</h3>
-                    <p className="text-white/70">
-                      Odgovorićemo vam u najkraćem roku.
-                    </p>
-                  </div>
+                  <motion.div
+                    className="w-16 h-16 border border-white/40 mx-auto mb-6 flex items-center justify-center"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <motion.path
+                        d="M5 13l4 4L19 7"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                      />
+                    </svg>
+                  </motion.div>
+                  <h3 className="text-2xl font-light mb-4">Message Sent</h3>
+                  <p className="text-white/50">
+                    We&apos;ll be in touch within 24 hours.
+                  </p>
                 </motion.div>
-              )}
-
-              {/* Name Field */}
-              <div className="relative">
-                <label
-                  htmlFor="name"
-                  className="block text-sm uppercase tracking-wider text-white/70 mb-2"
-                >
-                  Vaše Ime
-                </label>
-                <div className="relative">
-                  <User
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40"
-                    size={20}
-                  />
-                  <input
-                    type="text"
-                    id="name"
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-12">
+                  <FormField
+                    label="Your Name"
                     name="name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-white/5 border border-white/20 pl-12 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-neon-purple transition-colors"
-                    placeholder="Unesite vaše ime"
+                    value={formData.name}
+                    onChange={(value) => setFormData({ ...formData, name: value })}
                   />
-                </div>
-              </div>
-
-              {/* Email Field */}
-              <div className="relative">
-                <label
-                  htmlFor="email"
-                  className="block text-sm uppercase tracking-wider text-white/70 mb-2"
-                >
-                  Email Adresa
-                </label>
-                <div className="relative">
-                  <Mail
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40"
-                    size={20}
-                  />
-                  <input
-                    type="email"
-                    id="email"
+                  
+                  <FormField
+                    label="Email Address"
                     name="email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-white/5 border border-white/20 pl-12 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-neon-purple transition-colors"
-                    placeholder="vas@email.com"
+                    type="email"
+                    value={formData.email}
+                    onChange={(value) => setFormData({ ...formData, email: value })}
                   />
-                </div>
-              </div>
-
-              {/* Phone Field */}
-              <div className="relative">
-                <label
-                  htmlFor="phone"
-                  className="block text-sm uppercase tracking-wider text-white/70 mb-2"
-                >
-                  Telefon
-                </label>
-                <div className="relative">
-                  <Phone
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40"
-                    size={20}
+                  
+                  <FormField
+                    label="Company"
+                    name="company"
+                    value={formData.company}
+                    onChange={(value) => setFormData({ ...formData, company: value })}
                   />
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formState.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-white/5 border border-white/20 pl-12 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-neon-purple transition-colors"
-                    placeholder="+381 6X XXX XXXX"
-                  />
-                </div>
-              </div>
-
-              {/* Message Field */}
-              <div className="relative">
-                <label
-                  htmlFor="message"
-                  className="block text-sm uppercase tracking-wider text-white/70 mb-2"
-                >
-                  Poruka
-                </label>
-                <div className="relative">
-                  <MessageSquare
-                    className="absolute left-4 top-4 text-white/40"
-                    size={20}
-                  />
-                  <textarea
-                    id="message"
+                  
+                  <FormField
+                    label="Tell us about your project"
                     name="message"
-                    value={formState.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="w-full bg-white/5 border border-white/20 pl-12 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-neon-purple transition-colors resize-none"
-                    placeholder="Recite nam više o vašem projektu..."
+                    isTextarea
+                    value={formData.message}
+                    onChange={(value) => setFormData({ ...formData, message: value })}
                   />
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <motion.button
-                type="submit"
-                className="group w-full bg-neon-purple hover:bg-neon-purple/90 text-white font-semibold uppercase tracking-wider text-sm py-4 transition-all duration-300 relative overflow-hidden"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Pošalji Poruku
-                  <Send size={16} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-electric-blue"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-            </form>
+                  
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-5 border border-white/30 hover:border-white/60 text-sm tracking-super-wide uppercase transition-all duration-500 flex items-center justify-center gap-3 group disabled:opacity-50"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                  >
+                    {isSubmitting ? (
+                      <motion.div
+                        className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                      />
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <Send className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+                      </>
+                    )}
+                  </motion.button>
+                </form>
+              )}
+            </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Decorative element */}
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-electric-blue/10 rounded-full blur-3xl opacity-10" />
+      
+      {/* Bottom line */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5 }}
+      />
     </section>
-  );
+  )
 }
-

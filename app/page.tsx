@@ -1,97 +1,151 @@
-"use client";
+'use client'
 
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Capabilities from "@/components/Capabilities";
-import Manifesto from "@/components/Manifesto";
-import SEOContent from "@/components/SEOContent";
-import Contact from "@/components/Contact";
-import Navigation from "@/components/Navigation";
-import GridBackground from "@/components/GridBackground";
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
+import Navigation from '@/components/Navigation'
+import Hero from '@/components/Hero'
+import About from '@/components/About'
+import Services from '@/components/Services'
+import Process from '@/components/Process'
+import Contact from '@/components/Contact'
+import Footer from '@/components/Footer'
 
-export default function Home() {
+// Custom cursor component
+const CustomCursor = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+      setIsVisible(true)
+    }
+
+    const handleMouseLeave = () => setIsVisible(false)
+    const handleMouseEnter = () => setIsVisible(true)
+
+    window.addEventListener('mousemove', handleMouseMove)
+    document.body.addEventListener('mouseleave', handleMouseLeave)
+    document.body.addEventListener('mouseenter', handleMouseEnter)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      document.body.removeEventListener('mouseleave', handleMouseLeave)
+      document.body.removeEventListener('mouseenter', handleMouseEnter)
+    }
+  }, [])
+
   return (
-    <main className="relative min-h-screen bg-deep-black text-ghost-white">
-
-      {/* Grid Background */}
-      <GridBackground />
-
-      {/* Navigation */}
-      <Navigation />
-
-      {/* Hero Section */}
-      <Hero />
-
-      {/* About Section */}
-      <About />
-
-      {/* Capabilities Section */}
-      <Capabilities />
-
-      {/* Manifesto Section */}
-      <Manifesto />
-
-      {/* SEO Content Section */}
-      <SEOContent />
-
-      {/* Contact Section */}
-      <Contact />
-
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/10 bg-deep-black/80 backdrop-blur-md">
-        <div className="container mx-auto px-6 py-12">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            {/* Company Info */}
-            <div>
-              <h3 className="text-xl font-bold mb-4 text-neon-purple">Fantom</h3>
-              <p className="text-sm text-white/60 leading-relaxed mb-4">
-                Profesionalna agencija za izradu sajtova. Pravljenje web stranica, 
-                SEO optimizacija, web dizajn. Vaš partner za digitalni uspeh.
-              </p>
-              <p className="text-sm text-white/50">
-                📧 info@fantom.systems
-              </p>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-white/90">Naše Usluge</h4>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#capabilities" className="hover:text-neon-purple transition-colors">Izrada Web Sajtova</a></li>
-                <li><a href="#capabilities" className="hover:text-neon-purple transition-colors">E-Commerce Sajtovi</a></li>
-                <li><a href="#capabilities" className="hover:text-neon-purple transition-colors">SEO Optimizacija</a></li>
-                <li><a href="#capabilities" className="hover:text-neon-purple transition-colors">Web Dizajn</a></li>
-                <li><a href="#capabilities" className="hover:text-neon-purple transition-colors">Web Aplikacije</a></li>
-                <li><a href="#capabilities" className="hover:text-neon-purple transition-colors">Održavanje Sajtova</a></li>
-              </ul>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-white/90">Brzi Linkovi</h4>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li><a href="#about" className="hover:text-electric-blue transition-colors">O Nama</a></li>
-                <li><a href="#capabilities" className="hover:text-electric-blue transition-colors">Usluge</a></li>
-                <li><a href="#manifesto" className="hover:text-electric-blue transition-colors">Zašto Fantom</a></li>
-                <li><a href="#contact" className="hover:text-electric-blue transition-colors">Kontakt</a></li>
-                <li><a href="https://fantom.systems/sitemap.xml" className="hover:text-electric-blue transition-colors" target="_blank" rel="noopener noreferrer">Mapa Sajta</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-white/10 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-white/50">
-                © 2026 Fantom - Agencija za Izradu Sajtova. Sva prava zadržana.
-              </p>
-              <p className="text-sm text-white/50">
-                Izrada sajta | Pravljenje sajtova | Web dizajn
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </main>
-  );
+    <motion.div
+      className="cursor-glow hidden lg:block"
+      animate={{
+        x: mousePosition.x,
+        y: mousePosition.y,
+        opacity: isVisible ? 1 : 0,
+      }}
+      transition={{ type: 'spring', damping: 30, stiffness: 200 }}
+    />
+  )
 }
 
+// Loading screen component with logo
+const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
+  useEffect(() => {
+    const timer = setTimeout(onComplete, 2500)
+    return () => clearTimeout(timer)
+  }, [onComplete])
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[100] bg-background flex items-center justify-center"
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="relative flex flex-col items-center">
+        {/* Logo animation */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Image
+            src="/logo1.png"
+            alt="Fantom Systems"
+            width={200}
+            height={60}
+            className="h-12 w-auto"
+            priority
+          />
+        </motion.div>
+        
+        {/* Loading line */}
+        <motion.div
+          className="mt-8 w-48 h-px bg-white/20 overflow-hidden"
+        >
+          <motion.div
+            className="h-full bg-white/80"
+            initial={{ x: '-100%' }}
+            animate={{ x: '100%' }}
+            transition={{ duration: 1.5, repeat: 1, ease: 'easeInOut' }}
+          />
+        </motion.div>
+        
+        {/* Text */}
+        <motion.p
+          className="mt-6 text-xs tracking-ultra-wide text-white/40 uppercase"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          Architecting Intelligence
+        </motion.p>
+      </div>
+    </motion.div>
+  )
+}
+
+export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  return (
+    <>
+      {/* Loading screen */}
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      {/* Custom cursor glow effect */}
+      <CustomCursor />
+
+      {/* Main content */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        <Navigation />
+        
+        <Hero />
+        
+        <section id="about">
+          <About />
+        </section>
+        
+        <section id="services">
+          <Services />
+        </section>
+        
+        <section id="process">
+          <Process />
+        </section>
+        
+        <Contact />
+        
+        <Footer />
+      </motion.div>
+    </>
+  )
+}
